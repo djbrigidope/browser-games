@@ -113,3 +113,18 @@ function DOMDisplay(parent, level){
   this.actorLayer = null;
   this.drawFrame();
 }
+
+var scale = 20;
+
+DOMDisplay.prototype.drawBackground = function(){
+  var table = elt("table", "background");
+  table.style.width = this.level.width * scale + "px";
+  this.level.grid.forEach(function(row){
+    var rowELT = table.appendChild(elt("tr"));
+    rowELT.style.height = scale + "px";
+    row.forEach(function(type){
+      rowELT.appendChild(elt("td", type));
+    });
+  });
+  return table;
+};
